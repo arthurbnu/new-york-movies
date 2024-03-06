@@ -1,8 +1,8 @@
 <template>
   <div :data-theme="theme">
-    <div class="navbar fixed bg-base-100 z-40 shadow-sm">
+    <div class="navbar fixed bg-slate-900 z-40 shadow-sm">
       <div class="navbar-start">
-        <a class="btn btn-ghost md:text-xl text-teal-600">
+        <a class="btn btn-ghost text-xl text-teal-600">
 
           <span class="bold">
           <i class="las la-film "></i>  <i class="las la-map-marker "></i>

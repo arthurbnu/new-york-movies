@@ -35,10 +35,11 @@
 </template>
 
 <script setup>
+import ogImage from '../assets/images/capture.png';
 
 useHead({
       title: 'New York Movies',
-      description: 'hang out in NY, find movies ',
+      description: 'hang out in NY, find movies',
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon.png' },
       ],
@@ -47,7 +48,7 @@ useHead({
           hid: 'og:image',
           name: 'og:image',
           property: 'og:image',
-          content: "/capture.png",
+          content: ogImage,
         },
       ],
     });
@@ -59,8 +60,6 @@ import video from '../assets/images/natural-history-museum/nuit-au-musee.mp4';
 import video2 from '../assets/images/central-park/home-alone-2-gapstow-bridge.mp4';
 
 
-
-//
 </script >
 
 <style>

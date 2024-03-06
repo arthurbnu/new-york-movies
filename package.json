@@ -32,6 +32,7 @@
     "nuxt": "^3.9.1",
     "nuxt-gtag": "^1.1.2",
     "nuxt-headlessui": "^1.1.5",
+    "nuxt3-leaflet": "^1.0.12",
     "rimraf": "^5.0.5"
   },
   "dependencies": {

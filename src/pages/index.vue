@@ -304,7 +304,7 @@
 import { useHead } from '#app';
 import { definePageMeta } from '#imports';
 import GenericPanel from '~/components/commons/GenericPanel';
-import ogBanner from '../assets/images/nuxtwind-daisy-og-banner.jpg';
+import ogBanner from '../assets/images/nuxtwind-daisy-og-banner.jpg'; 
 
 export default {
   components: {

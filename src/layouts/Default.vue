@@ -2,7 +2,12 @@
   <div :data-theme="theme">
     <div class="navbar fixed bg-base-100 z-40 shadow-sm">
       <div class="navbar-start">
-        <a class="btn btn-ghost md:text-xl text-teal-600">New York movies ...</a>
+        <a class="btn btn-ghost md:text-xl text-teal-600">
+
+          <span class="bold">
+          <i class="las la-film "></i>  <i class="las la-map-marker "></i>
+        </span>
+          New York movies ...</a>
       </div>
       <div class="navbar-center hidden lg:flex">
         <!-- TODO: You can add menu here -->

@@ -316,8 +316,8 @@ export default {
     });
 
     useHead({
-      title: 'Nuxtwind Daisy 🟢💨🌼',
-      description: 'Nuxtwind Daisy is a starter template for Nuxt.js 3 + Tailwind CSS + Daisy UI with additional installed setup for custom font, icons, animation, and more.',
+      title: 'New York Movies',
+      description: 'hang out in NY, find movies ',
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon.png' },
       ],

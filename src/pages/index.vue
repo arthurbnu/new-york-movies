@@ -5,8 +5,11 @@
       <i class="las la-map-marker "></i>
       New York movies
   </h1>
-   <input type="text" v-model="search" placeholder="movie / place" 
-    class=" bg-teal-200 w-32 md:w-48 rounded-md h-8">
+  <div class="w-36 md:w-60 flex items-center gap-2">
+    <label for="search" class="text-gray-500 hidden md:block">Search</label>
+    <input id = "search" type="text" v-model="search" placeholder="movie / place" 
+    class=" bg-teal-200 w-full rounded-md h-8 p-1">
+  </div>
 </div>
 
   <div class="w-[100vw] h-[66vh]">
@@ -19,15 +22,17 @@
     </LMap>
   </div>
 
-  <div class="w-full overflow-scroll p-5 pt-3 md:p-7 bg-slate-900">
-    <div v-if="visibleMovies" class="flex w-[500%] md:w-[250%] gap-5">
-      <div v-for="movie in visibleMovies" :key="movie.src">
-        <video controls  class="h-40 max-w-">
-          <source :src="movie.src" type="video/mp4"/>
-        </video>
+  <client-only>
+    <div class="w-full overflow-scroll p-5 pt-3 md:p-7 bg-slate-900">
+      <div class="flex w-[500%] md:w-[250%] gap-5">
+        <div v-for="movie in visibleMovies" :key="movie.src">
+          <video controls  class="h-40 max-w-">
+            <source :src="movie.src" type="video/mp4"/>
+          </video>
+        </div>
       </div>
     </div>
-</div>
+  </client-only>
 </template>
 
 <script setup>

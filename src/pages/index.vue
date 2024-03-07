@@ -1,17 +1,16 @@
 <template>
 
-<div class="w-full h-14 grid items-center">
+<div class="w-full h-14 grid items-center"></div>
 
-</div>
-
-  <div class="w-[100vw] h-[100vh]">
-    <LMap ref="map" :zoom="zoom" :center="[40.781303, -73.974113]">
+  <div class="w-[100vw] h-[100vh] [&_.leaflet-popup-content-wrapper]:bg-white">
+    <!-- Times Square -->
+    <LMap ref="map" :zoom="zoom" :center="[40.758896, -73.985130]">
       <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
         layer-type="base" name="OpenStreetMap" />
 
       <l-marker :lat-lng="[40.781303, -73.974113]">
-        <l-popup class="m-3 w-60 max-w-full">
+        <l-popup class="m-3 w-60 max-w-full h-52">
           <h2 class="text-lg m-1 italic">National history museum</h2>
           <h3 class="text-md text-teal-700 m-1">Night at the museum</h3>
           <video controls width="600">
@@ -21,7 +20,7 @@
       </l-marker> 
 
       <l-marker :lat-lng="[40.766939, -73.973794]">
-        <l-popup class="m-3 w-60 max-w-full">
+        <l-popup class="m-3 w-60 max-w-full h-52">
           <h2 class="text-lg m-1 italic">Central Park</h2>
           <h3 class="text-md text-teal-700 m-1">Home Alone 2</h3>
           <video controls width="600">
@@ -31,9 +30,9 @@
       </l-marker>
 
       <l-marker :lat-lng="[40.688930, -74.044100]">
-        <l-popup class="m-3 w-60 max-w-full">
+        <l-popup class="m-3 w-60 max-w-full h-52">
           <h2 class="text-lg m-1 italic">Liberty statue</h2>
-          <h3 class="text-md text-teal-700 m-1">The day after tomorow</h3>
+          <h3 class="text-md text-teal-700 m-1">The day after tomorrow</h3>
           <video controls width="600">
             <source :src="video3" type="video/mp4" />
           </video>

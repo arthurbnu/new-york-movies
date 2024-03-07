@@ -9,15 +9,25 @@
     class=" bg-teal-200 w-32 md:w-48 rounded-md h-8">
 </div>
 
-  <div class="w-[100vw] h-[100vh]">
+  <div class="w-[100vw] h-[66vh]">
     <LMap ref="map" :zoom="zoom" :center="mapCenter">
       <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
         layer-type="base" name="OpenStreetMap" />
 
-      <VideoMarker v-for="(movie, id) in visibleMovies" v-bind="movie" :key="movie.src"/>
+      <VideoMarker v-for="movie in visibleMovies" v-bind="movie" :key="movie.src"/>
     </LMap>
   </div>
+
+  <div class="w-full overflow-scroll p-5 pt-3 md:p-7 bg-slate-900">
+    <div v-if="visibleMovies" class="flex w-[500%] md:w-[250%] gap-5">
+      <div v-for="movie in visibleMovies" :key="movie.src">
+        <video controls  class="h-40 max-w-">
+          <source :src="movie.src" type="video/mp4"/>
+        </video>
+      </div>
+    </div>
+</div>
 </template>
 
 <script setup>
@@ -63,12 +73,6 @@ const movies = [
     coords : [40.781303, -73.974113]
   },
   {
-    placeName : "Liberty statue",
-    title : "The day after tomorrow",
-    src : getMovie('liberty-statue/The-Day-After-Tomorrow.mp4'),
-    coords : [40.688930, -74.044100]
-  },
-  {
     placeName : "Central Park",
     title : "Home Alone 2",
     src : getMovie('central-park/home-alone-2-gapstow-bridge.mp4'),
@@ -79,6 +83,12 @@ const movies = [
     title : "Home Alone 2",
     src : getMovie('plaza-hotel/Home Alone - PLAZA HOTEL.mp4'),
     coords : [40.7606, -73.985]
+  },
+  {
+    placeName : "Liberty statue",
+    title : "The day after tomorrow",
+    src : getMovie('liberty-statue/The-Day-After-Tomorrow.mp4'),
+    coords : [40.688930, -74.044100]
   },
   {
     placeName : "Carnegie Hall",
@@ -102,14 +112,14 @@ const movies = [
     placeName : "Manhattan Bridge",
     title : "Independance day",
     src : getMovie('manhattan-bridge/Independence Day - MANHATTAN BRIDGE.mp4'),
-    coords : [40.699215, -73.99903]
+    coords : [40.707496, -73.990774]
   },
 
 ]
 
 watchEffect(() => {
   if (visibleMovies.value.length >=0)
-    mapCenter.value = [visibleMovies.value[0].coords[0]-.05, visibleMovies.value[0].coords[1]]
+    mapCenter.value = visibleMovies.value[0].coords
 })
 
 </script >

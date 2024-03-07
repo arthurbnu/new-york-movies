@@ -30,6 +30,16 @@
         </l-popup>
       </l-marker>
 
+      <l-marker :lat-lng="[40.688930, -74.044100]">
+        <l-popup class="m-3 w-60 max-w-full">
+          <h2 class="text-lg m-1 italic">Liberty statue</h2>
+          <h3 class="text-md text-teal-700 m-1">The day after tomorow</h3>
+          <video controls width="600">
+            <source :src="video3" type="video/mp4" />
+          </video>
+        </l-popup>
+      </l-marker>
+
     </LMap>
   </div>
 </template>
@@ -58,6 +68,7 @@ const zoom = ref(12)
 
 import video from '../assets/images/natural-history-museum/nuit-au-musee.mp4';
 import video2 from '../assets/images/central-park/home-alone-2-gapstow-bridge.mp4';
+import video3 from '../assets/images/liberty-statue/The-Day-After-Tomorrow.mp4';
 
 
 </script >

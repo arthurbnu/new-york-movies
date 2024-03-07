@@ -1,22 +1,28 @@
 <template>
+<div class="w-full h-14 flex justify-between items-center bg-gray-900 pr-5">
+  <h1 class="btn bold btn-ghost text-lg md:text-xl text-teal-600">
+      <i class="las la-film "></i>
+      <i class="las la-map-marker "></i>
+      New York movies ...
+  </h1>
+   <input type="text" v-model="search" placeholder="movie / place" 
+    class=" bg-teal-200 w-28 md:w-48 rounded-md h-8">
+</div>
 
-<div class="w-full h-14 grid items-center"></div>
-
-  <div class="w-[100vw] h-[100vh] [&_.leaflet-popup-content-wrapper]:bg-white [&_video]:min-h-36">
-
-    <LMap ref="map" :zoom="zoom" :center="[40.758896, -73.985130]">
+  <div class="w-[100vw] h-[100vh]">
+    <LMap ref="map" :zoom="zoom" :center="mapCenter">
       <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
         layer-type="base" name="OpenStreetMap" />
 
-      <VideoMarker v-for="movie in movies" v-bind="movie" :key="movie.title"/>
-
+      <VideoMarker v-for="(movie, id) in visibleMovies" v-bind="movie" :key="movie.src"/>
     </LMap>
   </div>
 </template>
 
 <script setup>
 import ogImage from '../assets/images/capture.png';
+const search = ref('')
 
 useHead({
       title: 'New York Movies',
@@ -34,10 +40,18 @@ useHead({
       ],
     });
     
+const mapCenter = ref([40.730824, -73.997330])
 const zoom = ref(12)
 
 const videoGlob = import.meta.glob('../assets/videos/*/*.mp4', { eager: true })
 const getMovie = movieName => videoGlob[`../assets/videos/${movieName}`].default
+
+const visibleMovies = computed(() =>
+    movies.filter(movie => 
+        movie.title.toUpperCase().includes(search.value.toUpperCase()) ||
+        movie.placeName.toUpperCase().includes(search.value.toUpperCase())    
+    )
+)
 
 const movies = [
   {
@@ -70,9 +84,25 @@ const movies = [
     src : getMovie('carnegie-hall/Home Alone - CARNEGIE HALL.mp4'),
     coords : [40.7648, -73.9797]
   },
-
+  {
+    placeName : "Times Square",
+    title : "Vanilla Sky",
+    src : getMovie('times-square/Vanilla Sky - TIMES SQUARE.mp4'),
+    coords : [40.759296, -73.985573]
+  },
+  {
+    placeName : "Brooklyn Bridge",
+    title : "John Wick Chapter 2",
+    src : getMovie('brooklyn-bridge/John Wick Chapter 2 - BROOKLYN BRIDGE.mp4'),
+    coords : [40.699215, -73.99903]
+  },
 
 ]
+
+watchEffect(() => {
+  if (visibleMovies.value.length >=0)
+    mapCenter.value = visibleMovies.value[0].coords
+})
 
 </script >
 

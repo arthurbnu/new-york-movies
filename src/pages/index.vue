@@ -2,7 +2,7 @@
 
 <div class="w-full h-14 grid items-center"></div>
 
-  <div class="w-[100vw] h-[100vh] [&_.leaflet-popup-content-wrapper]:bg-white">
+  <div class="w-[100vw] h-[100vh] [&_.leaflet-popup-content-wrapper]:bg-white [&_video]:min-h-36">
     <!-- Times Square -->
     <LMap ref="map" :zoom="zoom" :center="[40.758896, -73.985130]">
       <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

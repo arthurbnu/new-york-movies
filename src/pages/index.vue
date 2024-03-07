@@ -3,10 +3,10 @@
   <h1 class="btn bold btn-ghost text-lg md:text-xl text-teal-600">
       <i class="las la-film "></i>
       <i class="las la-map-marker "></i>
-      New York movies ...
+      New York movies
   </h1>
    <input type="text" v-model="search" placeholder="movie / place" 
-    class=" bg-teal-200 w-28 md:w-48 rounded-md h-8">
+    class=" bg-teal-200 w-32 md:w-48 rounded-md h-8">
 </div>
 
   <div class="w-[100vw] h-[100vh]">
@@ -46,10 +46,12 @@ const zoom = ref(12)
 const videoGlob = import.meta.glob('../assets/videos/*/*.mp4', { eager: true })
 const getMovie = movieName => videoGlob[`../assets/videos/${movieName}`].default
 
+const matchSearch = property => property.toUpperCase().includes(search.value.toUpperCase())
+
 const visibleMovies = computed(() =>
     movies.filter(movie => 
-        movie.title.toUpperCase().includes(search.value.toUpperCase()) ||
-        movie.placeName.toUpperCase().includes(search.value.toUpperCase())    
+      matchSearch(movie.title) ||
+      matchSearch(movie.placeName)   
     )
 )
 
@@ -96,12 +98,18 @@ const movies = [
     src : getMovie('brooklyn-bridge/John Wick Chapter 2 - BROOKLYN BRIDGE.mp4'),
     coords : [40.699215, -73.99903]
   },
+  {
+    placeName : "Manhattan Bridge",
+    title : "Independance day",
+    src : getMovie('manhattan-bridge/Independence Day - MANHATTAN BRIDGE.mp4'),
+    coords : [40.699215, -73.99903]
+  },
 
 ]
 
 watchEffect(() => {
   if (visibleMovies.value.length >=0)
-    mapCenter.value = visibleMovies.value[0].coords
+    mapCenter.value = [visibleMovies.value[0].coords[0]-.05, visibleMovies.value[0].coords[1]]
 })
 
 </script >

@@ -6,7 +6,7 @@
       New York movies
   </h1>
   <div class="w-36 md:w-60 flex items-center gap-2">
-    <label for="search" class="text-gray-500 hidden md:block">Search</label>
+    <label for="search" class="text-gray-500 hidden md:block"><i class="las la-search inline m-2 "></i>Search</label>
     <input id = "search" type="text" v-model="search" placeholder="movie / place" 
     class=" bg-teal-200 w-full rounded-md h-8 p-1">
   </div>
@@ -18,15 +18,17 @@
         attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
         layer-type="base" name="OpenStreetMap" />
 
-      <VideoMarker v-for="movie in visibleMovies" v-bind="movie" :key="movie.src"/>
+      <VideoMarker v-for="movie in visibleMovies" v-bind="movie" :key="movie.src" @click="selectedMovie = movie"/>
     </LMap>
   </div>
 
   <client-only>
-    <div class="w-full overflow-scroll p-5 pt-3 md:p-7 bg-slate-900">
+    <div ref = "moviesContainer" class="w-full overflow-scroll p-5 pt-3 md:p-7 bg-slate-900">
       <div class="flex w-[500%] md:w-[250%] gap-5">
         <div v-for="movie in visibleMovies" :key="movie.src">
-          <video controls  class="h-40 max-w-">
+          <span :class="{'text-teal-200 animate-pulse' : movie.src === selectedMovie?.src}"  
+            class="text-teal-600 inline-block max-h-6 overflow-hidden transition-all">{{movie.title}}</span>
+          <video controls class="h-32" ref = "videos" :data-src = "movie.src">
             <source :src="movie.src" type="video/mp4"/>
           </video>
         </div>
@@ -38,6 +40,7 @@
 <script setup>
 import ogImage from '../assets/images/capture.png';
 const search = ref('')
+const videos = ref([])
 
 useHead({
       title: 'New York Movies',
@@ -57,6 +60,8 @@ useHead({
     
 const mapCenter = ref([40.730824, -73.997330])
 const zoom = ref(12)
+const selectedMovie = ref()
+const moviesContainer = ref()
 
 const videoGlob = import.meta.glob('../assets/videos/*/*.mp4', { eager: true })
 const getMovie = movieName => videoGlob[`../assets/videos/${movieName}`].default
@@ -125,6 +130,13 @@ const movies = [
 watchEffect(() => {
   if (visibleMovies.value.length >=0)
     mapCenter.value = visibleMovies.value[0].coords
+})
+
+watchEffect(() => {
+  if (selectedMovie.value){
+    const vid = videos.value.find(v => v.dataset.src == selectedMovie.value.src)
+    moviesContainer.value.scrollLeft = vid.offsetLeft
+  }
 })
 
 </script >

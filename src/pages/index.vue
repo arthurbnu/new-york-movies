@@ -6,8 +6,9 @@
       New York movies
   </h1>
   <div class="w-36 md:w-60 flex items-center gap-2">
-    <label for="search" class="text-gray-500 hidden md:block"><i class="las la-search inline m-2 "></i>Search</label>
-    <input id = "search" type="text" v-model="search" placeholder="movie / place" 
+    <label for="search" class="text-gray-500 hidden md:block">
+      <i class="las la-search inline m-2 "></i>Search</label>
+      <input id = "search" type="text" v-model="search" placeholder="movie / place" 
     class=" bg-teal-200 w-full rounded-md h-8 p-1">
   </div>
 </div>
@@ -83,7 +84,7 @@ const movies = [
     coords : [40.781303, -73.974113]
   },
   {
-    placeName : "Central Park",
+    placeName : "Gapstow bridge",
     title : "Home Alone 2",
     src : getMovie('central-park/home-alone-2-gapstow-bridge.mp4'),
     coords : [40.766939, -73.973794]

@@ -1,10 +1,14 @@
 <template>
 <div class="w-full h-14 flex justify-between items-center bg-gray-900 pr-5">
-  <h1 class="btn bold btn-ghost text-lg md:text-xl text-teal-600">
-      <i class="las la-film "></i>
-      <i class="las la-map-marker "></i>
-      New York movies
-  </h1>
+  <div class="text-teal-600">
+    <a href="">
+      <h1 class="btn bold btn-ghost text-lg md:text-xl">
+        <i class="las la-map-marker"></i>
+        New York movies
+      </h1>
+    </a>
+    <a href="wikidata" class="text-sm hidden md:inline">Wikidata</a>
+  </div>
   <div class="w-36 md:w-60 flex items-center gap-2">
     <label for="search" class="text-gray-500 hidden md:block">
       <i class="las la-search inline m-2 "></i>Search</label>

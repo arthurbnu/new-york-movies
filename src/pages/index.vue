@@ -1,5 +1,16 @@
 <template>
 <div class="w-full h-14 flex justify-between items-center bg-gray-900 pr-5">
+  <transition-scale group class="contents" no-opacity>
+    <div  v-for="movie in visibleMovies" :key="movie.src" v-show="movie.src == hoveredMovie?.src"
+      class="hidden md:block absolute top-4 px-2 left-[45vw] w-56 rounded-lg text-teal-500 animate-pulse z-20 bg-teal-300/20 "
+      :class = "{'border-b-2 border-teal-600/35 animate-none' : selectedMovie.src == hoveredMovie.src}"
+    >
+    <i class="las la-map-marker"></i>
+    <span class="">
+      {{ hoveredMovie?.title  }} 
+    </span>
+    </div>
+</transition-scale>
   <div class="text-teal-600">
     <a href="">
       <h1 class="btn bold btn-ghost text-lg md:text-xl">
@@ -23,7 +34,9 @@
         attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
         layer-type="base" name="OpenStreetMap" />
 
-      <VideoMarker v-for="movie in visibleMovies" v-bind="movie" :key="movie.src" @click="selectedMovie = movie"/>
+      <VideoMarker v-for="movie in visibleMovies" v-bind="movie" :key="movie.src" @click="selectedMovie = movie"
+      @mouseover="hoveredMovie = movie"
+      />
     </LMap>
   </div>
 
@@ -43,9 +56,10 @@
 </template>
 
 <script setup>
-import ogImage from '../assets/images/capture.png';
-const search = ref('')
-const videos = ref([])
+import ogImage from '@/assets/images/capture.png';
+import jsonMovies from '@/assets/movies.json';
+const videoGlob = import.meta.glob('@/assets/videos/*/*.mp4', { eager: true })
+jsonMovies.forEach(m => m.src = videoGlob[`/assets/videos/${m.path}`].default )
 
 useHead({
       title: 'New York Movies',
@@ -63,84 +77,43 @@ useHead({
       ],
     });
     
+const search = ref('')
+const videos = ref([])
+
 const mapCenter = ref([40.730824, -73.997330])
 const zoom = ref(12)
 const selectedMovie = ref()
+const hoveredMovie = ref()
 const moviesContainer = ref()
 
-const videoGlob = import.meta.glob('../assets/videos/*/*.mp4', { eager: true })
-const getMovie = movieName => videoGlob[`../assets/videos/${movieName}`].default
-
-const matchSearch = property => property.toUpperCase().includes(search.value.toUpperCase())
+const matchSearch = property => property?.toUpperCase().includes(search.value.toUpperCase())
 
 const visibleMovies = computed(() =>
-    movies.filter(movie => 
+jsonMovies.filter(movie => 
       matchSearch(movie.title) ||
-      matchSearch(movie.placeName)   
+      matchSearch(movie.place) ||
+      matchSearch(movie.tags)  
     )
 )
 
-const movies = [
-  {
-    placeName : "National History Museum",
-    title : "Night at the museum",
-    src : getMovie('natural-history-museum/nuit-au-musee.mp4'),
-    coords : [40.781303, -73.974113]
-  },
-  {
-    placeName : "Gapstow bridge",
-    title : "Home Alone 2",
-    src : getMovie('central-park/home-alone-2-gapstow-bridge.mp4'),
-    coords : [40.766939, -73.973794]
-  },
-  {
-    placeName : "Plaza Hotel",
-    title : "Home Alone 2",
-    src : getMovie('plaza-hotel/Home Alone - PLAZA HOTEL.mp4'),
-    coords : [40.7606, -73.985]
-  },
-  {
-    placeName : "Liberty statue",
-    title : "The day after tomorrow",
-    src : getMovie('liberty-statue/The-Day-After-Tomorrow.mp4'),
-    coords : [40.688930, -74.044100]
-  },
-  {
-    placeName : "Carnegie Hall",
-    title : "Home Alone 2",
-    src : getMovie('carnegie-hall/Home Alone - CARNEGIE HALL.mp4'),
-    coords : [40.7648, -73.9797]
-  },
-  {
-    placeName : "Times Square",
-    title : "Vanilla Sky",
-    src : getMovie('times-square/Vanilla Sky - TIMES SQUARE.mp4'),
-    coords : [40.759296, -73.985573]
-  },
-  {
-    placeName : "Brooklyn Bridge",
-    title : "John Wick Chapter 2",
-    src : getMovie('brooklyn-bridge/John Wick Chapter 2 - BROOKLYN BRIDGE.mp4'),
-    coords : [40.699215, -73.99903]
-  },
-  {
-    placeName : "Manhattan Bridge",
-    title : "Independance day",
-    src : getMovie('manhattan-bridge/Independence Day - MANHATTAN BRIDGE.mp4'),
-    coords : [40.707496, -73.990774]
-  },
-
-]
-
 watchEffect(() => {
-  if (visibleMovies.value.length >=0)
+  if (visibleMovies.value.length >=0){
     mapCenter.value = visibleMovies.value[0].coords
+  }
 })
+
+// watch(hoveredMovie, currentValue => {
+//    setTimeout(() => {
+//       if (hoveredMovie.value === currentValue) 
+//         hoveredMovie.value = null
+//     }
+//     , 2000)
+// })
 
 watchEffect(() => {
   if (selectedMovie.value){
     const vid = videos.value.find(v => v.dataset.src == selectedMovie.value.src)
-    moviesContainer.value.scrollLeft = vid.offsetLeft
+    moviesContainer.value.scrollLeft = vid.offsetLeft - 10
   }
 })
 

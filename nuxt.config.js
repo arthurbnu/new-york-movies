@@ -12,8 +12,10 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     'nuxt-headlessui',
     'nuxt-gtag',
-    'nuxt3-leaflet'
+    'nuxt3-leaflet',
+    '@morev/vue-transitions/nuxt',
 
+    
   ],
 
   gtag: {

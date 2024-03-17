@@ -1,0 +1,52 @@
+[
+    {
+      "place" : "National History Museum",
+      "title" : "Night at the museum",
+      "path" : "natural-history-museum/nuit-au-musee.mp4",
+      "coords" : [40.781303, -73.974113]
+    },
+    {
+      "place" : "Gapstow bridge",
+      "title" : "Home Alone 2",
+      "tags" : "central park",
+      "path" : "central-park/home-alone-2-gapstow-bridge.mp4",
+      "coords" : [40.766939, -73.973794]
+    },
+    {
+      "place" : "Plaza Hotel",
+      "title" : "Home Alone 2",
+      "path" : "plaza-hotel/Home Alone - PLAZA HOTEL.mp4",
+      "coords" : [40.7606, -73.985]
+    },
+    {
+      "place" : "Liberty statue",
+      "title" : "The day after tomorrow",
+      "path" : "liberty-statue/The-Day-After-Tomorrow.mp4",
+      "coords" : [40.688930, -74.044100]
+    },
+    {
+      "place" : "Carnegie Hall",
+      "title" : "Home Alone 2",
+      "path" : "carnegie-hall/Home Alone - CARNEGIE HALL.mp4",
+      "coords" : [40.7648, -73.9797]
+    },
+    {
+      "place" : "Times Square",
+      "title" : "Vanilla Sky",
+      "path" : "times-square/Vanilla Sky - TIMES SQUARE.mp4",
+      "coords" : [40.759296, -73.985573]
+    },
+    {
+      "place" : "Brooklyn Bridge",
+      "title" : "John Wick Chapter 2",
+      "path" : "brooklyn-bridge/John Wick Chapter 2 - BROOKLYN BRIDGE.mp4",
+      "coords" : [40.699215, -73.99903]
+    },
+    {
+      "place" : "Manhattan Bridge",
+      "title" : "Independance day",
+      "path" : "manhattan-bridge/Independence Day - MANHATTAN BRIDGE.mp4",
+      "coords" : [40.707496, -73.990774]
+    }
+  
+  ]

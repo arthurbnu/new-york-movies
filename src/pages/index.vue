@@ -3,7 +3,7 @@
   <transition-scale group class="contents" no-opacity>
     <div  v-for="movie in visibleMovies" :key="movie.src" v-show="movie.src == hoveredMovie?.src"
       class="hidden md:block absolute top-4 px-2 left-[45vw] w-56 rounded-lg text-teal-500 animate-pulse z-20 bg-teal-300/20 "
-      :class = "{'border-b-2 border-teal-600/35 animate-none' : movie.src == selectedMovie?.src}"
+      :class = "{'border-b-2 border-teal-600/35 !animate-none' : movie.src == selectedMovie?.src}"
     >
     <i class="las la-map-marker"></i>
     <span class="">
